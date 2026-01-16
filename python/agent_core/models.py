@@ -138,8 +138,12 @@ class Spotter:
         # Capture screen
         if bounds:
             left, top, right, bottom = bounds
-            width, height = right - left, bottom - top
-            img_data = _core.capture_region(left, top, width, height)
+            # Clamp negative coordinates (window borders/shadows can be off-screen)
+            capture_left = max(left, 0)
+            capture_top = max(top, 0)
+            width = right - capture_left
+            height = bottom - capture_top
+            img_data = _core.capture_region(capture_left, capture_top, width, height)
         else:
             width, height, img_data = _core.capture_screen()
 

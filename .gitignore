@@ -1,0 +1,6 @@
+/target/
+/python/agent_core/__pycache__/
+/python/agent_core/*.pyd
+/.venv/
+__pycache__/
+*.pyc

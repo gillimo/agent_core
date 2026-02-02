@@ -1,0 +1,53 @@
+[package]
+name = "agent_core"
+version = "0.1.1"
+edition = "2021"
+
+[lib]
+name = "agent_core"
+crate-type = ["cdylib", "rlib"]
+
+[[bin]]
+name = "agent_core_cli"
+path = "src/main.rs"
+
+[dependencies]
+# Python bindings (0.22+ supports Python 3.13)
+pyo3 = { version = "0.22", features = ["extension-module"] }
+
+# Parallel processing
+rayon = "1.8"
+# For Screen Capture
+xcap = "0.0.14"
+windows-sys = { version = "0.61.2", features = ["Win32_UI_WindowsAndMessaging", "Win32_Foundation"] }
+
+# For Image Processing
+image = "0.25"
+
+# For Mouse/Keyboard Control
+enigo = "0.3"
+
+# --- AI / ML (The Brain) ---
+candle-core = "0.8.2"
+candle-nn = "0.8.2"
+candle-transformers = "0.8.2"
+tokenizers = "0.20"
+hf-hub = "0.3" # To download the model automatically
+anyhow = "1.0" # For easy error handling
+
+# For Async/Await (needed for high-performance loops)
+tokio = { version = "1", features = ["full"] }
+
+# For potentially calling AI APIs later
+reqwest = { version = "0.12", features = ["json"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+base64 = "0.22"
+
+# For nice logs
+env_logger = "0.11"
+log = "0.4"
+
+[profile.release]
+opt-level = 3
+lto = true

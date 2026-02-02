@@ -1,16 +1,5 @@
 # agent_core
 
-## What It Is
-
-Start 2026-01-15 — Rust/PyO3 core for screen capture + deterministic input. DXGI capture, parallel pixel detection, and native input execution built as a reusable agent substrate. Purpose-built for high-FPS perception loops, low-latency action pipelines, and reliability under load.
-
-## How It Works
-
-- **Fast Screen Capture** — Capture full screen or regions at 30-60 FPS
-- **Parallel Color Detection** — Find pixels by RGB with tolerance (Rayon-powered)
-- **Input Control** — Mouse movement, clicks, keyboard input via native APIs
-- **Zero Python Dependencies** — Pure Rust compiled to a Python extension
-
 Mission Learning Statement
 - Mission: Build a high-performance capture + input core for agent systems.
 - Learning focus: Rust/PyO3 FFI, low-latency screen capture, deterministic input control.

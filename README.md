@@ -5,7 +5,7 @@ Mission Learning Statement
 - Learning focus: Rust/PyO3 FFI, low-latency screen capture, deterministic input control.
 - Project start date: 2026-01-15 (inferred from earliest git commit)
 
-High-performance screen capture, color detection, and input control for Python â€” powered by Rust.
+High-performance screen capture, color detection, and input control for Python - powered by Rust.
 
 [![Rust](https://img.shields.io/badge/rust-1.70+-orange.svg)](https://www.rust-lang.org/)
 [![Python](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/)
@@ -13,10 +13,10 @@ High-performance screen capture, color detection, and input control for Python �
 
 ## Features
 
-- **Fast Screen Capture** â€” Capture full screen or regions at 30-60 FPS
-- **Parallel Color Detection** â€” Find pixels by RGB with tolerance (Rayon-powered)
-- **Input Control** â€” Mouse movement, clicks, keyboard input via native APIs
-- **Zero Python Dependencies** â€” Pure Rust compiled to a Python extension
+- **Fast Screen Capture** - Capture full screen or regions at 30-60 FPS
+- **Parallel Color Detection** - Find pixels by RGB with tolerance (Rayon-powered)
+- **Input Control** - Mouse movement, clicks, keyboard input via native APIs
+- **Zero Python Dependencies** - Pure Rust compiled to a Python extension
 
 ## Installation
 
@@ -75,7 +75,7 @@ agent_core.press_key("Return")
 
 | Function | Description | Returns |
 |----------|-------------|---------|
-| `detect_color(data, w, h, r, g, b, tol)` | Find pixels matching RGB Â± tolerance | `[(x, y), ...]` |
+| `detect_color(data, w, h, r, g, b, tol)` | Find pixels matching RGB  tolerance | `[(x, y), ...]` |
 | `detect_arrow(data, w, h)` | Find yellow arrow/marker | `(x, y, confidence)` or `None` |
 | `detect_highlight(data, w, h)` | Find cyan highlight | `(x, y, confidence)` or `None` |
 
@@ -110,60 +110,57 @@ agent_core.press_key("Return")
 
 ## Use Cases
 
-- **Game Automation** â€” Capture game screens, detect UI elements, send inputs
-- **Testing** â€” Automated UI testing with visual verification
-- **Accessibility** â€” Screen readers and interaction tools
-- **Research** â€” Vision-based AI agent development
+- **Game Automation** - Capture game screens, detect UI elements, send inputs
+- **Testing** - Automated UI testing with visual verification
+- **Accessibility** - Screen readers and interaction tools
+- **Research** - Vision-based AI agent development
 
 ## Architecture
 
 ```
-â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
-â”‚           Python Application            â”‚
-â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
-                  â”‚ import agent_core
-                  â–¼
-â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
-â”‚            agent_core (Rust)            â”‚
-â”œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¤
-â”‚  capture.rs â”‚  detection  â”‚   input.rs  â”‚
-â”‚  (xcap)     â”‚  (rayon)    â”‚   (enigo)   â”‚
-â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”´â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”´â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
-                  â”‚
-                  â–¼
-â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
-â”‚         Native OS APIs (Windows)        â”‚
-â”‚      DXGI, SendInput, User32.dll        â”‚
-â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+Python Application
+  |
+  v
+agent_core (Rust)
+  |\
+  | +-- capture.rs (xcap)
+  | +-- detection.rs (rayon)
+  | +-- input.rs (enigo)
+  v
+Native OS APIs (Windows)
+  |\
+  | +-- DXGI
+  | +-- SendInput
+  | +-- User32.dll
 ```
 
 ## Roadmap
 
-- [x] v0.1.0 â€” Screen capture, color detection, input control
-- [ ] v0.2.0 â€” Humanization (timing profiles, Bezier mouse paths)
-- [ ] v0.3.0 â€” OCR integration, template matching
-- [ ] v0.4.0 â€” Hardware detection, SIMD optimization
-- [ ] v1.0.0 â€” Multi-monitor, Linux/macOS support
+- [x] v0.1.0 - Screen capture, color detection, input control
+- [ ] v0.2.0  Humanization (timing profiles, Bezier mouse paths)
+- [ ] v0.3.0  OCR integration, template matching
+- [ ] v0.4.0  Hardware detection, SIMD optimization
+- [ ] v1.0.0  Multi-monitor, Linux/macOS support
 
 ## Project Structure
 
 ```
 agent_core/
-â”œâ”€â”€ src/
-â”‚   â”œâ”€â”€ lib.rs        # PyO3 module definition
-â”‚   â”œâ”€â”€ capture.rs    # Screen capture
-â”‚   â”œâ”€â”€ detection.rs  # Color detection
-â”‚   â”œâ”€â”€ input.rs      # Mouse/keyboard control
-â”‚   â”œâ”€â”€ eye.rs        # Legacy Eye struct
-â”‚   â”œâ”€â”€ brain.rs      # AI inference (CLI only)
-â”‚   â””â”€â”€ main.rs       # CLI entry point
-â”œâ”€â”€ docs/
-â”‚   â”œâ”€â”€ ARCHITECTURE.md
-â”‚   â”œâ”€â”€ TICKETS.md
-â”‚   â””â”€â”€ LOGBOOK.md
-â”œâ”€â”€ Cargo.toml
-â”œâ”€â”€ pyproject.toml
-â””â”€â”€ README.md
+ src/
+    lib.rs        # PyO3 module definition
+    capture.rs    # Screen capture
+    detection.rs  # Color detection
+    input.rs      # Mouse/keyboard control
+    eye.rs        # Legacy Eye struct
+    brain.rs      # AI inference (CLI only)
+    main.rs       # CLI entry point
+ docs/
+    ARCHITECTURE.md
+    TICKETS.md
+    LOGBOOK.md
+ Cargo.toml
+ pyproject.toml
+ README.md
 ```
 
 ## Building
@@ -191,11 +188,11 @@ Contributions welcome! Please read the [tickets](docs/TICKETS.md) for planned fe
 
 ## License
 
-MIT License â€” see [LICENSE](LICENSE) for details.
+MIT License - see [LICENSE](LICENSE) for details.
 
 ## Acknowledgments
 
-- [PyO3](https://pyo3.rs/) â€” Rust bindings for Python
-- [xcap](https://github.com/aspect-rs/xcap) â€” Cross-platform screen capture
-- [enigo](https://github.com/enigo-rs/enigo) â€” Cross-platform input simulation
-- [Rayon](https://github.com/rayon-rs/rayon) â€” Data parallelism library
+- [PyO3](https://pyo3.rs/)  Rust bindings for Python
+- [xcap](https://github.com/aspect-rs/xcap)  Cross-platform screen capture
+- [enigo](https://github.com/enigo-rs/enigo)  Cross-platform input simulation
+- [Rayon](https://github.com/rayon-rs/rayon)  Data parallelism library
